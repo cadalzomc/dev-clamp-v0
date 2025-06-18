@@ -1,6 +1,8 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import React, { FormEvent, useState } from "react";
+import { signIn } from "next-auth/react";
 import { Button } from "@/components/shadcn/button";
 import {
   Dialog,
@@ -16,8 +18,10 @@ import { CInput } from "@/components/custom";
 import { FormValues } from "@/lib/common";
 import { IPayloadLogin } from "@/lib/models";
 import { IconFacebook, IconGoogle } from "@/components/icons";
+import { toast } from "sonner";
 
 export const SignInDialog = () => {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -29,13 +33,40 @@ export const SignInDialog = () => {
     const values = FormValues<IPayloadLogin>(e);
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(values);
+
+    const res = await signIn("credentials", {
+      ...values,
+      redirect: false,
+    });
+
+    if (!res?.ok) {
+      setLoading(false);
+      toast.error("Invalid Username or Password");
+      return;
+    }
+
+    console.log(res);
+    toast.success("Authenticaton", {
+      description: "👍 Logging in is successful",
+    });
+
     setLoading(false);
     setOpen(false);
+
+    setTimeout(() => {
+      router.push("/");
+    }, 500);
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog
+      open={open}
+      onOpenChange={(nextOpen) => {
+        if (!loading) {
+          setOpen(nextOpen);
+        }
+      }}
+    >
       <DialogTrigger asChild>
         <Button variant="ghost" className="font-medium">
           Sign In

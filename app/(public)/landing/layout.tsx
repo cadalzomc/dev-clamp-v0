@@ -1,6 +1,6 @@
-import LayoutMainPublic from "../_ui/layouts/main.public";
+import LayoutMainPublic from "../../_ui/layouts/main.public";
 
-export default function LayoutDashboard({
+export default function LayoutPublic({
   children,
 }: {
   children: React.ReactNode;
