@@ -1,5 +1,3 @@
-import { Header } from "./main.header";
-
 export default function LayoutMainAuth({
   children,
 }: {
@@ -7,7 +5,7 @@ export default function LayoutMainAuth({
 }) {
   return (
     <div className="relative flex min-h-screen flex-col">
-      <Header />
+      <div>AUTH</div>
       <main className="flex-1">{children}</main>
     </div>
   );

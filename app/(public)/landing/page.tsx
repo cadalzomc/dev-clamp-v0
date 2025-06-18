@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/shadcn/button";
 import {
   Card,
@@ -6,10 +8,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/shadcn/card";
-import { Badge } from "@/components/shadcn/badge";
-import { Star, Shield, Zap, Users, ArrowRight, Check } from "lucide-react";
+import { Shield, Zap, Users, ArrowRight, Check } from "lucide-react";
 
-export default function Home() {
+const PublicHomePage = () => {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -111,4 +112,6 @@ export default function Home() {
       </section>
     </div>
   );
-}
+};
+
+export default PublicHomePage;
