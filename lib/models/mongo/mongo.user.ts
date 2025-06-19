@@ -1,18 +1,17 @@
 import mongoose, { Model, Schema } from "mongoose";
 import { IDocument, IStamp } from "@/lib/models";
+import { TStatus } from "@/types/app.type";
 
 export interface IDocUser extends IDocument {
   no: string;
   code: string;
   username: string;
   password: string;
-  role: string;
   name: string;
   email: string;
   photo?: string;
-  active: boolean;
   lastLogin?: string;
-  stamp?: IStamp;
+  status: TStatus;
 }
 
 const schemaStamp = new Schema(
@@ -28,18 +27,16 @@ const schemaStamp = new Schema(
 const schema = new Schema<IDocUser>({
   no: { type: String, required: true, unique: true },
   code: { type: String, default: "" },
-  role: { type: String, default: "Member" },
-  username: { type: String, required: true, unique: true, index: true },
+  username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   name: { type: String, required: true, index: true },
-  email: { type: String, required: true, unique: true },
+  email: { type: String, default: "" },
   photo: { type: String, default: "" },
-  active: { type: Boolean, required: true },
   lastLogin: { type: String, default: "" },
+  status: { type: String, default: "UNVERIFIED" },
   stamp: schemaStamp,
 });
 
-const Users: Model<IDocUser> =
-  mongoose.models?.Users ?? mongoose.model<IDocUser>("Users", schema);
+const Users: Model<IDocUser> = mongoose.models?.Users ?? mongoose.model<IDocUser>("Users", schema);
 
 export default Users;

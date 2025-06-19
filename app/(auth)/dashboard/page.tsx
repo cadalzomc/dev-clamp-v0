@@ -6,6 +6,7 @@ const AuthHomePage = () => {
   const router = useRouter();
 
   const handleLogout = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     await signOut();
 
     router.refresh();

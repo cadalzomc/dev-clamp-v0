@@ -20,6 +20,18 @@ const nextConfig = {
     if (isProd && !isServer) {
       config.optimization.minimize = true;
     }
+
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      'kerberos': false,
+      'snappy': false,
+      'aws4': false,
+      'gcp-metadata': false,
+      '@aws-sdk/credential-providers': false,
+      '@mongodb-js/zstd': false,
+      'mongodb-client-encryption': false,
+    };
+
     return config;
   },
 };
