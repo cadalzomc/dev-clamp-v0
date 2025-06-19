@@ -1,8 +1,8 @@
 import "@/app/_ui/css/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ThemeProvider } from "@/lib/context";
-import { DynamicToaster } from "@/lib/context";
+import { ThemeProvider, DynamicToaster, QueryProviders } from "@/lib/context";
+
 import {
   IconError,
   IconInfo,
@@ -11,9 +11,6 @@ import {
 } from "@/components/icons";
 
 const inter = Inter({ subsets: ["latin"] });
-
-
-
 
 export const metadata: Metadata = {
   title: "Dev Clamp V0 - Your Modern Web Application",
@@ -35,7 +32,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <QueryProviders>{children}</QueryProviders>
           <DynamicToaster
             position="bottom-left"
             visibleToasts={10}

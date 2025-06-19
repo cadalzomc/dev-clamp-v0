@@ -54,7 +54,7 @@ export const SignInDialog = () => {
     setOpen(false);
 
     setTimeout(() => {
-      router.push("/");
+      router.refresh();
     }, 500);
   };
 
@@ -78,9 +78,7 @@ export const SignInDialog = () => {
             <LogIn className="h-5 w-5" />
             Welcome Back
           </DialogTitle>
-          <DialogDescription>
-            Sign in to your account to continue
-          </DialogDescription>
+          <DialogDescription>Sign in to your account to continue</DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4 pt-4">
@@ -136,9 +134,7 @@ export const SignInDialog = () => {
               <Separator className="w-full" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">
-                Or continue with
-              </span>
+              <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
             </div>
           </div>
 
